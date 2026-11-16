@@ -1,11 +1,9 @@
 import { EvidenceFigure } from '../components/EvidenceFigure'
 import { Label, Section, SectionHeader } from '../components/primitives'
 import { evidence } from '../content/evidence'
-import { SpaceBackdrop } from '../components/illustrations/SpaceBackdrop'
 
 export function DevelopmentEvidence() {
   return <Section id="development-evidence">
-    <SpaceBackdrop scene="evidence" />
     <div className="content-section evidence-section">
       <SectionHeader id="development-evidence" label={evidence.label} title={evidence.title} />
       <p className="section-lead evidence-lead">{evidence.lead}</p>

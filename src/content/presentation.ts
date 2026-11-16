@@ -19,7 +19,7 @@ export const presentation = {
     visualCaption: "Project visual pending inclusion.",
     apk: {
         label: "Download Android APK",
-        url: "https://github.com/Caryuter/nasa-space-app-challenge-eir-mobile/releases",
+        url: "https://github.com/Caryuter/nasa-space-app-challenge-eir-mobile/releases/tag/v1.0.1",
     },
     sections: [
         { id: "introduction", label: "Introduction", available: true },

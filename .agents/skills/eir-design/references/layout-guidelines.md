@@ -27,12 +27,13 @@ Cada sección lleva cabecera estándar: etiqueta mono con número y nombre (`01 
 
 ## Motivo visual recurrente
 
-Inspirado en el mecanismo de la referencia (objeto que rompe el borde de un disco), no en su ilustración.
+La escena 3D aprobada del Hero fija el lenguaje ambiental: materiales dimensionales, luz lateral cian/azul, profundidad atmosférica y acentos ámbar contenidos. La antigua ilustración lineal de planetas y astronautas deja de ser la autoridad para el arte ambiental. En las secciones 02–05, crear composiciones específicas que apoyen el foco editorial y varíen de sección a sección, sin convertir diagramas o evidencias en escenas decorativas. Los planetas y astronautas ambientales deben tener volumen; no usar clip-art técnico plano.
 
-- **Forma:** un disco circular (contorno de 1 px o superficie `dust` tenue con luz lateral). Representa un cuerpo celeste/órbita.
-- **Elemento que lo rompe:** un asset real del proyecto (captura de la app, dispositivo, un gráfico) que sobresale del borde. **Pendiente de que el usuario aporte el asset.** Mientras tanto, usar `Placeholder`.
-- **Uso:** hero (protagonista), y como máximo dos secciones más con un papel distinto (p. ej. fondo parcial recortado, o marcador de escala en la arquitectura).
-- **No hacer:** repetirlo en todas las secciones, animarlo en bucle, añadir estrellas/partículas alrededor, o usar clip-art de cohetes y astronautas.
+- **Capturas:** conservar el medio real sin alterar su contenido; usar luz y estructura orbital alrededor, sin cubrir la pantalla.
+- **Arquitectura:** destacar el flujo con líneas y superficies discretas; mantener pequeñas etiquetas sobre fondos limpios y detalles expandibles accesibles.
+- **Pendiente:** conservar el `Placeholder` con tipo de evidencia y procedencia que falta; el arte ambiental no puede parecer una captura, un resultado ni una métrica.
+- **Movimiento:** usar movimiento solo cuando apoye la narrativa; respetar movimiento reducido y evitar animación continua fuera de la sección visible.
+- **Autoridad:** estas pautas actualizan solo el arte ambiental. La tipografía, jerarquía editorial y estilos de UI de EIR permanecen intactos.
 
 ## Hero
 

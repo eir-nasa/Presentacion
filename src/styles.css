@@ -153,8 +153,25 @@
   .challenge-layout, .solution-layout { display: grid; gap: 3rem; margin-top: 3rem; }
   .section-lead { max-width: 32ch; margin: 0; font-size: var(--text-lead); line-height: 1.35; }
   .section-description { max-width: 65ch; margin: 2rem 0 0; color: var(--color-ink-muted); font-size: var(--text-body); line-height: 1.6; }
-  .challenge-aside { border-top: 1px solid var(--color-line-strong); padding-top: 1.5rem; }
-  .challenge-aside > p { margin: 1rem 0 2rem; max-width: 30ch; color: var(--color-ink); font-size: var(--text-body); line-height: 1.6; }
+  .challenge-aside { border-top: 1px solid var(--color-line-strong); padding-top: 1.5rem; margin-top: 2rem; }
+  .challenge-aside > p { margin: 1rem 0 1.5rem; max-width: 38ch; color: var(--color-ink); font-size: var(--text-body); line-height: 1.6; }
+  .challenge-visual { position: relative; margin: 0; min-width: 0; align-self: center; }
+  .challenge-scene { position: relative; isolation: isolate; width: 100%; min-height: 20rem; aspect-ratio: 1.15; overflow: hidden; }
+  .challenge-scene-canvas { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; pointer-events: none; }
+  .challenge-scene-fallback { position: absolute; inset: 0; overflow: hidden; }
+  .challenge-fallback-planet { position: absolute; top: 7%; left: 0; width: 76%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 34% 31%, color-mix(in srgb, var(--color-space-cyan) 48%, var(--color-space-blue)) 0%, color-mix(in srgb, var(--color-space-blue) 48%, var(--color-void)) 49%, var(--color-void) 77%); box-shadow: inset -1.25rem -1rem 2.5rem var(--color-void), 0 0 1.8rem color-mix(in srgb, var(--color-space-cyan) 28%, transparent); }
+  .challenge-fallback-astronaut { position: absolute; z-index: 1; top: 15%; left: 62%; width: clamp(5rem, 25%, 8rem); height: 75%; transform: rotate(5deg); }
+  .challenge-fallback-astronaut i { position: absolute; display: block; background: linear-gradient(135deg, var(--color-ink), var(--color-line-strong)); border: 1px solid color-mix(in srgb, var(--color-ink-muted) 75%, transparent); }
+  .challenge-fallback-astronaut .astronaut-helmet { z-index: 3; top: 0; left: 23%; width: 54%; aspect-ratio: 1; border-radius: 50%; }
+  .challenge-fallback-astronaut .astronaut-helmet b { position: absolute; inset: 24% 12% 20%; border-radius: 50%; background: radial-gradient(ellipse at 30% 24%, color-mix(in srgb, var(--color-space-cyan) 34%, var(--color-space-blue)), var(--color-void) 72%); border: 1px solid var(--color-space-cyan); }
+  .challenge-fallback-astronaut .astronaut-pack { z-index: 1; top: 28%; left: 4%; width: 34%; height: 28%; background: linear-gradient(135deg, var(--color-ink-muted), var(--color-void-raised)); }
+  .challenge-fallback-astronaut .astronaut-torso { z-index: 2; top: 29%; left: 27%; width: 48%; height: 34%; border-radius: 35% 35% 20% 20%; }
+  .challenge-fallback-astronaut .astronaut-arm { z-index: 2; top: 32%; width: 20%; height: 37%; border-radius: 999px; }
+  .challenge-fallback-astronaut .astronaut-arm-one { left: 11%; transform: rotate(22deg); }
+  .challenge-fallback-astronaut .astronaut-arm-two { right: 4%; transform: rotate(-22deg); }
+  .challenge-fallback-astronaut .astronaut-leg { z-index: 2; top: 57%; width: 22%; height: 31%; border-radius: 999px; }
+  .challenge-fallback-astronaut .astronaut-leg-one { left: 26%; transform: rotate(5deg); }
+  .challenge-fallback-astronaut .astronaut-leg-two { right: 21%; transform: rotate(-5deg); }
   .content-placeholder { position: static; transform: none; width: 100%; aspect-ratio: auto; align-items: center; min-height: 8rem; }
   .feature-list { list-style: none; margin: 3rem 0 0; padding: 0; border-top: 1px solid var(--color-line); }
   .feature-list li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: baseline; border-bottom: 1px solid var(--color-line); padding: 1rem 0; font-size: var(--text-body); line-height: 1.5; }
@@ -164,7 +181,7 @@
 }
 
 @media (min-width: 48rem) {
-  .challenge-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 4rem; }
+  .challenge-layout { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: 3rem; }
   .solution-layout { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 4rem; }
   .solution-layout .hero-figure { justify-self: end; width: min(100%, 18rem); }
 }
@@ -286,6 +303,42 @@
 }
 
 .results-closing-canvas { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; opacity: .66; pointer-events: none; }
+
+/* Sections 02–05 use restrained, purpose-built environments around their content. */
+.solution-section { position: relative; }
+.solution-layout { align-items: center; }
+.solution-layout .hero-figure { width: min(100%, 30rem); }
+.solution-visual { position: relative; min-height: 30rem; display: grid; place-items: center; isolation: isolate; }
+.solution-visual::before { content: ''; position: absolute; z-index: -2; inset: 8% -8%; background: radial-gradient(ellipse at 55% 50%, color-mix(in srgb, var(--color-space-blue) 26%, transparent), transparent 48%), radial-gradient(ellipse at 70% 42%, color-mix(in srgb, var(--color-space-cyan) 10%, transparent), transparent 57%); }
+.solution-orbit-structure { position: absolute; z-index: -1; inset: 8% -6%; overflow: hidden; pointer-events: none; }
+.solution-orbit-structure::before, .solution-orbit-structure::after { content: ''; position: absolute; border: 1px solid color-mix(in srgb, var(--color-space-cyan) 34%, transparent); border-radius: 50%; transform: rotate(-24deg); }
+.solution-orbit-structure::before { width: 118%; height: 54%; left: -12%; top: 24%; }
+.solution-orbit-structure::after { width: 70%; height: 112%; right: 3%; top: -8%; border-color: color-mix(in srgb, var(--color-line-strong) 60%, transparent); transform: rotate(34deg); }
+.solution-orbit-structure > span { position: absolute; top: 11%; right: 10%; width: 28%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 28% 28%, color-mix(in srgb, var(--color-space-cyan) 48%, var(--color-space-blue)), color-mix(in srgb, var(--color-space-blue) 56%, var(--color-void)) 55%, var(--color-void) 78%); box-shadow: inset -.8rem -.7rem 1.2rem var(--color-void), 0 0 1.5rem color-mix(in srgb, var(--color-space-cyan) 24%, transparent); }
+.solution-screenshot-frame { position: relative; width: min(100%, 21rem); padding: .65rem; border: 1px solid color-mix(in srgb, var(--color-space-cyan) 40%, var(--color-line)); border-radius: 1rem; background: color-mix(in srgb, var(--color-void) 90%, var(--color-space-blue)); box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--color-void) 65%, transparent), 0 0 2rem color-mix(in srgb, var(--color-space-blue) 20%, transparent); }
+.solution-screenshot { width: 100%; max-width: none; border-radius: .45rem; }
+
+.architecture-environment { position: relative; isolation: isolate; padding: clamp(1rem, 3vw, 2.5rem); border: 1px solid color-mix(in srgb, var(--color-space-blue) 25%, var(--color-line)); border-radius: var(--radius-frame); background: radial-gradient(ellipse at 8% 0%, color-mix(in srgb, var(--color-space-blue) 20%, transparent), transparent 35%), radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--color-space-cyan) 10%, transparent), transparent 40%), color-mix(in srgb, var(--color-void) 94%, var(--color-space-blue)); }
+.architecture-environment::before { content: ''; position: absolute; z-index: -1; left: 4%; right: 4%; top: 50%; height: 1px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-space-cyan) 38%, transparent), color-mix(in srgb, var(--color-line-strong) 50%, transparent), transparent); }
+.architecture-node { background: color-mix(in srgb, var(--color-void-raised) 97%, var(--color-space-blue)); border-color: color-mix(in srgb, var(--color-space-blue) 42%, var(--color-line-strong)); box-shadow: 0 .75rem 2rem color-mix(in srgb, var(--color-void) 40%, transparent); }
+.architecture-node summary > .label { color: var(--color-space-cyan); }
+.architecture-flow { position: relative; }
+.architecture-connection { min-width: 0; }
+
+.evidence-section { position: relative; }
+.evidence-group { padding-top: 1.25rem; }
+.evidence-items { gap: 1.5rem; }
+.evidence-figure { gap: 1rem; padding-bottom: 1.5rem; }
+.evidence-media { position: relative; isolation: isolate; display: grid; place-items: start center; padding: .75rem; border: 1px solid color-mix(in srgb, var(--color-space-blue) 26%, var(--color-line)); border-radius: var(--radius-frame); background: radial-gradient(ellipse at 50% 45%, color-mix(in srgb, var(--color-space-blue) 18%, transparent), transparent 72%), color-mix(in srgb, var(--color-void-raised) 86%, var(--color-space-blue)); }
+.evidence-media img, .evidence-media video { position: relative; z-index: 1; width: min(100%, 28rem); border-color: color-mix(in srgb, var(--color-line-strong) 70%, var(--color-space-blue)); }
+.evidence-placeholder { position: relative; width: 100%; min-height: 13rem; overflow: hidden; background: color-mix(in srgb, var(--color-void) 74%, transparent); }
+.evidence-pending-art { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.evidence-pending-art::before { content: ''; position: absolute; top: 50%; left: 50%; width: 10rem; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(ellipse at 31% 30%, color-mix(in srgb, var(--color-space-cyan) 36%, var(--color-space-blue)), color-mix(in srgb, var(--color-space-blue) 42%, var(--color-void)) 52%, var(--color-void) 78%); box-shadow: inset -.8rem -.7rem 1.5rem var(--color-void), 0 0 1.5rem color-mix(in srgb, var(--color-space-blue) 23%, transparent); opacity: .8; }
+.evidence-pending-art span { position: absolute; top: 30%; left: 25%; width: 50%; height: 42%; border: 1px solid color-mix(in srgb, var(--color-space-cyan) 38%, transparent); border-radius: 50%; transform: rotate(-22deg); }
+.evidence-pending-art i, .evidence-pending-art b { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: var(--color-ink-muted); }
+.evidence-pending-art i { top: 22%; left: 18%; }
+.evidence-pending-art b { bottom: 23%; right: 17%; }
+.evidence-placeholder > .label { position: relative; z-index: 1; max-width: 34ch; padding: .75rem; border: 1px dashed color-mix(in srgb, var(--color-line-strong) 78%, transparent); background: color-mix(in srgb, var(--color-void) 78%, transparent); }
 
 
 @layer components {
