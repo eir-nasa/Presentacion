@@ -15,6 +15,7 @@ export function Architecture() {
               <details className="architecture-node">
                 <summary><Label>{architecture.android.label}</Label><strong>{architecture.android.title}</strong><span>{architecture.android.summary}</span></summary>
                 <p>{architecture.android.detail}</p>
+                <div className="architecture-technical"><Label>{architecture.technicalLabel}</Label><p>{architecture.android.technicalDetail}</p></div>
               </details>
               <div className="device-capabilities">
                 <p>{architecture.android.local}</p>
@@ -29,6 +30,7 @@ export function Architecture() {
               <details className="architecture-node">
                 <summary><Label>{architecture.backend.label}</Label><strong>{architecture.backend.title}</strong><span>{architecture.backend.summary}</span></summary>
                 <p>{architecture.backend.detail}</p>
+                <div className="architecture-technical"><Label>{architecture.technicalLabel}</Label><p>{architecture.backend.technicalDetail}</p></div>
               </details>
             </li>
             <li className="architecture-connection storage-connection">
@@ -39,6 +41,7 @@ export function Architecture() {
               <details className="architecture-node">
                 <summary><Label>{architecture.database.label}</Label><strong>{architecture.database.title}</strong><span>{architecture.database.summary}</span></summary>
                 <p>{architecture.database.detail}</p>
+                <div className="architecture-technical"><Label>{architecture.technicalLabel}</Label><p>{architecture.database.technicalDetail}</p></div>
               </details>
             </li>
           </ol>

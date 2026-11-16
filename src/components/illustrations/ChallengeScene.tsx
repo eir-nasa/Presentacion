@@ -45,7 +45,7 @@ export function ChallengeScene() {
   return <div ref={root} className="challenge-scene" role="img" aria-label="A spacesuited astronaut floats beside a blue planet in deep space.">
     {(!visible || !Scene || !ready || failed || reducedMotion) && <div className="challenge-scene-fallback" aria-hidden="true">
       <span className="challenge-fallback-planet" />
-      <span className="challenge-fallback-astronaut"><i className="astronaut-helmet"><b /></i><i className="astronaut-pack" /><i className="astronaut-torso" /><i className="astronaut-arm astronaut-arm-one" /><i className="astronaut-arm astronaut-arm-two" /><i className="astronaut-leg astronaut-leg-one" /><i className="astronaut-leg astronaut-leg-two" /></span>
+      <span className="challenge-fallback-astronaut"><i className="astronaut-pack" /><i className="astronaut-torso" /><i className="astronaut-collar" /><i className="astronaut-helmet"><b /></i><i className="astronaut-arm astronaut-arm-one" /><i className="astronaut-arm astronaut-arm-two" /><i className="astronaut-glove astronaut-glove-one" /><i className="astronaut-glove astronaut-glove-two" /><i className="astronaut-leg astronaut-leg-one" /><i className="astronaut-leg astronaut-leg-two" /><i className="astronaut-boot astronaut-boot-one" /><i className="astronaut-boot astronaut-boot-two" /></span>
     </div>}
     {visible && !reducedMotion && Scene && !failed && <Scene
       reducedMotion={reducedMotion}

@@ -1,4 +1,4 @@
-import { Label, Placeholder, Section, SectionHeader } from '../components/primitives'
+import { Label, Section, SectionHeader } from '../components/primitives'
 import { challenge } from '../content/presentation'
 import { ChallengeScene } from '../components/illustrations/ChallengeScene'
 
@@ -13,7 +13,10 @@ export function Challenge() {
           <aside className="challenge-aside">
             <Label>{challenge.contextLabel}</Label>
             <p>{challenge.context}</p>
-            <Placeholder className="content-placeholder source-placeholder" description={challenge.sourcePending} />
+            <ul className="source-list">{challenge.sources.map((source) => <li key={source.url}>
+              <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
+              <span>{source.note}</span>
+            </li>)}</ul>
           </aside>
         </div>
         <figure className="challenge-visual"><ChallengeScene /></figure>

@@ -1,5 +1,4 @@
 import {
-    Figure,
     Label,
     Section,
     SectionHeader,
@@ -23,20 +22,19 @@ export function Introduction() {
                     <p className="hero-description">
                         {presentation.description}
                     </p>
+                    <p className="hero-tagline">{presentation.tagline}</p>
                     <div className="hero-event">
-                        <Label>{presentation.event}</Label>
+                        <Label>{presentation.team} · {presentation.event}</Label>
                     </div>
                     <a className="apk-link" href={presentation.apk.url}>
                         {presentation.apk.label}
                     </a>
                 </div>
-                <Figure caption={presentation.visualCaption}>
-                    <div className="orbital-composition">
-                        <HeroPlanetScene />
-                        <HeroOrbit />
-                        <HeroSpacecraft />
-                    </div>
-                </Figure>
+                <div className="orbital-composition" aria-hidden="true">
+                    <HeroPlanetScene />
+                    <HeroOrbit />
+                    <HeroSpacecraft />
+                </div>
             </div>
         </Section>
     );

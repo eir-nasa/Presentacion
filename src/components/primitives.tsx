@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { presentation } from '../content/presentation'
 
 export function Section({ id, children }: { id: string; children: ReactNode }) {
   return <section id={id} className="section-shell" aria-labelledby={`${id}-title`}>{children}</section>
@@ -19,8 +18,4 @@ export function Frame({ children, className = '' }: { children: ReactNode; class
 
 export function Figure({ children, caption }: { children: ReactNode; caption: string }) {
   return <figure className="hero-figure">{children}<figcaption className="figure-caption">{caption}</figcaption></figure>
-}
-
-export function Placeholder({ description, className = '', artwork }: { description: string; className?: string; artwork?: ReactNode }) {
-  return <Frame className={`placeholder ${className}`}>{artwork}<Label>[{presentation.pendingLabel}: {description}]</Label></Frame>
 }

@@ -50,65 +50,58 @@ function Atmosphere() {
 function Astronaut() {
   const suit = '#b9c8d0'
   const trim = '#607d91'
-  return <group>
-    <mesh position={[0, -0.08, 0]}>
-      <capsuleGeometry args={[0.25, 0.48, 6, 12]} />
+  const boot = '#425764'
+  return <group rotation={[0.04, -0.18, -0.06]}>
+    <mesh position={[0, 0.04, 0]}>
+      <capsuleGeometry args={[0.27, 0.5, 8, 16]} />
       <meshStandardMaterial color={suit} roughness={0.7} metalness={0.08} />
     </mesh>
-    <mesh position={[0, 0.06, 0.04]}>
-      <boxGeometry args={[0.3, 0.29, 0.12]} />
+    <mesh position={[0, 0.1, -0.27]}>
+      <boxGeometry args={[0.46, 0.58, 0.22]} />
       <meshStandardMaterial color="#738a98" roughness={0.76} metalness={0.18} />
     </mesh>
-    <mesh position={[0, -0.08, 0.17]}>
-      <boxGeometry args={[0.19, 0.2, 0.035]} />
+    <mesh position={[0, 0.14, 0.285]}>
+      <boxGeometry args={[0.22, 0.26, 0.045]} />
       <meshStandardMaterial color="#d4e0e5" roughness={0.52} metalness={0.24} />
     </mesh>
-    <mesh position={[0, -0.08, 0.195]}>
-      <boxGeometry args={[0.09, 0.07, 0.012]} />
+    <mesh position={[0, 0.14, 0.315]}>
+      <boxGeometry args={[0.1, 0.075, 0.014]} />
       <meshStandardMaterial color="#607d91" roughness={0.42} metalness={0.3} />
     </mesh>
-    <mesh position={[0, 0.58, 0.03]}>
+    <mesh position={[0, 0.55, 0]} rotation={[Math.PI / 2, 0, 0]}>
+      <torusGeometry args={[0.245, 0.042, 8, 24]} />
+      <meshStandardMaterial color={trim} roughness={0.52} metalness={0.28} />
+    </mesh>
+    <mesh position={[0, 0.8, 0.035]}>
       <sphereGeometry args={[0.34, 32, 24]} />
       <meshStandardMaterial color="#d4e0e5" roughness={0.28} metalness={0.22} />
     </mesh>
-    <mesh position={[0, 0.57, 0.3]} scale={[0.245, 0.205, 0.08]}>
+    <mesh position={[0, 0.79, 0.305]} scale={[0.25, 0.21, 0.085]}>
       <sphereGeometry args={[1, 32, 24]} />
       <meshPhysicalMaterial color="#10283a" roughness={0.16} metalness={0.68} clearcoat={0.8} clearcoatRoughness={0.18} />
     </mesh>
-    <mesh position={[0, 0.58, 0.325]} scale={[0.18, 0.018, 0.012]}>
+    <mesh position={[0, 0.8, 0.335]} scale={[0.18, 0.018, 0.012]}>
       <sphereGeometry args={[1, 20, 12]} />
       <meshBasicMaterial color="#72d9eb" transparent opacity={0.6} />
     </mesh>
-    <mesh position={[-0.32, 0.02, -0.02]}>
-      <boxGeometry args={[0.22, 0.43, 0.34]} />
-      <meshStandardMaterial color="#728b99" roughness={0.72} metalness={0.34} />
-    </mesh>
-    <mesh position={[-0.29, 0.07, 0.16]}>
-      <boxGeometry args={[0.08, 0.11, 0.025]} />
-      <meshStandardMaterial color="#e8832a" emissive="#8c4312" emissiveIntensity={0.12} roughness={0.44} metalness={0.4} />
-    </mesh>
-    {[-1, 1].map((side) => <group key={side}>
-      <mesh position={[side * 0.34, -0.03, 0]} rotation={[0, 0, side * -0.32]}>
-        <capsuleGeometry args={[0.085, 0.36, 5, 10]} />
-        <meshStandardMaterial color={suit} roughness={0.68} metalness={0.1} />
-      </mesh>
-      <mesh position={[side * 0.43, -0.31, 0.01]}>
-        <sphereGeometry args={[0.095, 16, 12]} />
-        <meshStandardMaterial color={trim} roughness={0.55} metalness={0.25} />
-      </mesh>
-      <mesh position={[side * 0.15, -0.58, 0]} rotation={[0, 0, side * 0.06]}>
-        <capsuleGeometry args={[0.095, 0.34, 5, 10]} />
-        <meshStandardMaterial color={suit} roughness={0.7} metalness={0.08} />
-      </mesh>
-      <mesh position={[side * 0.15, -0.83, 0.055]}>
-        <boxGeometry args={[0.2, 0.13, 0.29]} />
-        <meshStandardMaterial color="#657c8b" roughness={0.58} metalness={0.3} />
-      </mesh>
+    {[-1, 1].map((side) => <group key={`arm-${side}`} position={[side * 0.29, 0.38, 0]} rotation={[0, 0, side * 0.34]}>
+      <mesh><sphereGeometry args={[0.115, 16, 12]} /><meshStandardMaterial color={trim} roughness={0.56} metalness={0.22} /></mesh>
+      <mesh position={[0, -0.2, 0]}><capsuleGeometry args={[0.095, 0.22, 6, 12]} /><meshStandardMaterial color={suit} roughness={0.68} metalness={0.1} /></mesh>
+      <group position={[0, -0.41, 0]} rotation={[0, 0, -side * 0.16]}>
+        <mesh><sphereGeometry args={[0.1, 16, 12]} /><meshStandardMaterial color={trim} roughness={0.55} metalness={0.25} /></mesh>
+        <mesh position={[0, -0.18, 0]}><capsuleGeometry args={[0.085, 0.2, 6, 12]} /><meshStandardMaterial color={suit} roughness={0.68} metalness={0.1} /></mesh>
+        <mesh position={[0, -0.39, 0.025]} scale={[1, 1.12, 1]}><sphereGeometry args={[0.1, 16, 12]} /><meshStandardMaterial color={trim} roughness={0.5} metalness={0.28} /></mesh>
+      </group>
     </group>)}
-    <mesh position={[0, 0.3, 0.02]} rotation={[0, 0, Math.PI / 2]}>
-      <torusGeometry args={[0.34, 0.018, 6, 36]} />
-      <meshStandardMaterial color="#70d7e9" emissive="#176277" emissiveIntensity={0.35} metalness={0.48} roughness={0.28} />
-    </mesh>
+    {[-1, 1].map((side) => <group key={`leg-${side}`} position={[side * 0.15, -0.45, 0]} rotation={[0, 0, side * 0.055]}>
+      <mesh><sphereGeometry args={[0.13, 16, 12]} /><meshStandardMaterial color={trim} roughness={0.56} metalness={0.22} /></mesh>
+      <mesh position={[0, -0.22, 0]}><capsuleGeometry args={[0.11, 0.24, 6, 12]} /><meshStandardMaterial color={suit} roughness={0.7} metalness={0.08} /></mesh>
+      <group position={[0, -0.45, 0]} rotation={[0, 0, -side * 0.075]}>
+        <mesh><sphereGeometry args={[0.115, 16, 12]} /><meshStandardMaterial color={trim} roughness={0.55} metalness={0.25} /></mesh>
+        <mesh position={[0, -0.2, 0]}><capsuleGeometry args={[0.1, 0.22, 6, 12]} /><meshStandardMaterial color={suit} roughness={0.7} metalness={0.08} /></mesh>
+        <mesh position={[side * 0.025, -0.43, 0.1]}><boxGeometry args={[0.21, 0.14, 0.31]} /><meshStandardMaterial color={boot} roughness={0.58} metalness={0.3} /></mesh>
+      </group>
+    </group>)}
   </group>
 }
 
@@ -136,7 +129,10 @@ function ChallengeComposition({ reducedMotion }: { reducedMotion: boolean }) {
     if (reducedMotion || elapsed.current >= 4.5) return
     elapsed.current = Math.min(4.5, elapsed.current + delta)
     const progress = elapsed.current / 4.5
-    if (astronaut.current) astronaut.current.position.y = Math.sin(progress * Math.PI) * 0.09
+    if (astronaut.current) {
+      astronaut.current.position.y = -0.2 + Math.sin(progress * Math.PI) * 0.09
+      astronaut.current.rotation.z = Math.sin(progress * Math.PI) * 0.035
+    }
     if (planet.current) planet.current.rotation.y = progress * 0.12
     if (elapsed.current < 4.5) invalidate()
   })

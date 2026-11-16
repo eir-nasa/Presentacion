@@ -12,6 +12,16 @@ export function DevelopmentEvidence() {
         <div className="evidence-items">{group.items.map((item) => <EvidenceFigure key={item.id} item={item} />)}</div>
         {group.id === 'android' && <details className="evidence-gallery"><summary>{evidence.galleryLabel}</summary><p>{evidence.galleryNote}</p><div className="evidence-items">{evidence.gallery.map((item) => <EvidenceFigure key={item.id} item={item} />)}</div></details>}
       </section>)}</div>
+      <details className="evidence-technical">
+        <summary><Label>{evidence.technical.label}</Label><span>{evidence.technical.title}</span></summary>
+        <p>{evidence.technical.lead}</p>
+        <div className="evidence-items">{evidence.technical.items.map((item) => <EvidenceFigure key={item.id} item={item} />)}</div>
+      </details>
+      <section className="research-section" aria-labelledby="research-title">
+        <h3 id="research-title">{evidence.research.title}</h3>
+        <p>{evidence.research.lead}</p>
+        <ul>{evidence.research.items.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.name}</a><span>{source.note}</span></li>)}</ul>
+      </section>
     </div>
   </Section>
 }
