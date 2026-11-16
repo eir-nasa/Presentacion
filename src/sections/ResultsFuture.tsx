@@ -1,8 +1,10 @@
 import { Label, Section, SectionHeader } from '../components/primitives'
 import { results } from '../content/results'
+import { ResultsClosingScene } from '../components/illustrations/ResultsClosingScene'
 
 export function ResultsFuture() {
   return <Section id="results-future">
+    <ResultsClosingScene />
     <div className="content-section results-section">
       <SectionHeader id="results-future" label={results.label} title={results.title} />
       <p className="section-lead results-lead">{results.lead}</p>

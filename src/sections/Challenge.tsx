@@ -1,6 +1,6 @@
-import { Label, Placeholder, Section, SectionHeader } from '../components/primitives'
+import { Label, Section, SectionHeader } from '../components/primitives'
 import { challenge } from '../content/presentation'
-import { ChallengeMarks } from '../components/illustrations/ChallengeMarks'
+import { ChallengeScene } from '../components/illustrations/ChallengeScene'
 
 export function Challenge() {
   return <Section id="the-challenge">
@@ -10,12 +10,16 @@ export function Challenge() {
         <div className="editorial-copy">
           <p className="section-lead">{challenge.lead}</p>
           <p className="section-description">{challenge.description}</p>
+          <aside className="challenge-aside">
+            <Label>{challenge.contextLabel}</Label>
+            <p>{challenge.context}</p>
+            <ul className="source-list">{challenge.sources.map((source) => <li key={source.url}>
+              <a href={source.url} target="_blank" rel="noreferrer">{source.name}</a>
+              <span>{source.note}</span>
+            </li>)}</ul>
+          </aside>
         </div>
-        <aside className="challenge-aside">
-          <Label>{challenge.contextLabel}</Label>
-          <p>{challenge.context}</p>
-          <Placeholder className="content-placeholder source-placeholder" description={challenge.sourcePending} artwork={<ChallengeMarks />} />
-        </aside>
+        <figure className="challenge-visual"><ChallengeScene /></figure>
       </div>
     </div>
   </Section>

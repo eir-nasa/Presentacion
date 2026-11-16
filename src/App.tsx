@@ -123,7 +123,7 @@ export default function App() {
       <Introduction />
       <nav className="presentation-nav" aria-label={presentation.navigationLabel}>
         <ol>{presentation.sections.map((section, index) => <li key={section.id}>
-          {section.available ? <a href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined} onClick={presenting ? (event) => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0) { event.preventDefault(); navigateTo(section.id) } } : undefined}><span className="nav-number">0{index + 1}</span><span>{section.label}</span></a> : <span className="nav-unavailable"><span className="nav-number">0{index + 1}</span><span>{section.label}</span><span className="sr-only"> — {presentation.upcomingLabel}</span></span>}
+          {section.available ? <a href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined} onClick={presenting ? (event) => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0) { event.preventDefault(); navigateTo(section.id) } } : undefined}><span className="nav-number">0{index + 1}</span><span>{section.label}</span></a> : <span className="nav-unavailable"><span className="nav-number">0{index + 1}</span><span>{section.label}</span></span>}
         </li>)}</ol>
       </nav>
       <Challenge />
