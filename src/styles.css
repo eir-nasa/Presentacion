@@ -254,10 +254,38 @@
   .results-close p { margin: 0; font-size: var(--text-lead); line-height: 1.35; }
   .results-close a { display: inline-flex; align-items: center; gap: .75rem; min-height: 2.75rem; color: var(--color-ember); text-decoration: none; }
   .results-close a:hover { color: var(--color-ember-soft); }
+  .results-closing-layer { top: 0; right: -8%; bottom: 0; left: auto; width: min(72vw, 66rem); height: 100%; min-height: 100%; overflow: hidden; }
+  .results-closing-layer::before { content: none; }
+  .results-closing-fallback { position: absolute; inset: 0; overflow: hidden; opacity: .68; }
+  .closing-fallback-stars { position: absolute; inset: 0 0 0 86%; background-image: radial-gradient(circle, var(--color-ink-muted) 0 1px, transparent 1.5px), radial-gradient(circle, var(--color-space-cyan) 0 1px, transparent 1.5px), radial-gradient(circle, var(--color-ink-muted) 0 1px, transparent 1.5px); background-position: 12% 22%, 58% 18%, 38% 76%; background-size: 7rem 6rem, 11rem 9rem, 13rem 11rem; }
+  .closing-fallback-trajectory { position: absolute; top: 29%; right: -72%; width: 90%; height: 62%; border: 1px solid color-mix(in srgb, var(--color-space-cyan) 48%, transparent); border-radius: 50%; transform: rotate(-24deg); }
+  .closing-fallback-planet { position: absolute; top: 25%; right: -37%; width: 55%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 32% 32%, color-mix(in srgb, var(--color-space-cyan) 66%, var(--color-space-blue)) 0%, color-mix(in srgb, var(--color-space-blue) 54%, var(--color-void)) 48%, var(--color-void) 76%); box-shadow: inset -1.5rem -1rem 2.8rem var(--color-void), 0 0 2rem color-mix(in srgb, var(--color-space-cyan) 32%, transparent); }
+  .closing-fallback-craft { position: absolute; top: 39%; left: 82%; width: 2.4rem; height: .65rem; border: 1px solid var(--color-ink-muted); background: var(--color-void-raised); transform: rotate(-24deg); }
+  .closing-fallback-craft::before, .closing-fallback-craft::after { content: ''; position: absolute; top: 50%; width: 1.1rem; height: .42rem; border: 1px solid var(--color-space-cyan); background: color-mix(in srgb, var(--color-space-blue) 72%, var(--color-void)); transform: translateY(-50%); }
+  .closing-fallback-craft::before { right: 100%; margin-right: .18rem; }
+  .closing-fallback-craft::after { left: 100%; margin-left: .18rem; }
+  .closing-fallback-craft i { position: absolute; top: 50%; right: .4rem; width: .3rem; height: .3rem; border-radius: 50%; background: var(--color-ember); transform: translateY(-50%); }
 }
 @media (min-width: 48rem) {
   .results-layout { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 4rem; }
 }
+
+@media (max-width: 47.99rem) {
+  .results-closing-layer { top: auto; right: -15%; bottom: 1%; width: 130vw; height: 32%; min-height: 16rem; }
+  .results-closing-fallback { opacity: .42; }
+  .closing-fallback-trajectory { top: 28%; right: -72%; width: 90%; height: 60%; }
+  .closing-fallback-planet { top: 25%; right: -33%; width: 52%; }
+  .closing-fallback-craft { left: 82%; }
+  .results-closing-canvas { opacity: .42; }
+}
+
+@media (min-width: 80rem) {
+  .closing-fallback-trajectory { right: -75%; }
+  .closing-fallback-planet { right: -40%; }
+  .closing-fallback-craft { left: 85%; }
+}
+
+.results-closing-canvas { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; opacity: .66; pointer-events: none; }
 
 
 @layer components {
