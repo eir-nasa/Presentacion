@@ -2,7 +2,30 @@ import { useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-type SceneProps = { reducedMotion: boolean; onReady: () => void; onUnavailable: () => void }
+type SceneProps = { active: boolean; reducedMotion: boolean; onReady: () => void; onUnavailable: () => void }
+
+function SceneReady({ onReady }: Pick<SceneProps, 'onReady'>) {
+  const invalidate = useThree((state) => state.invalidate)
+  useEffect(() => {
+    invalidate()
+    const frame = window.requestAnimationFrame(onReady)
+    return () => window.cancelAnimationFrame(frame)
+  }, [invalidate, onReady])
+  return null
+}
+
+function ContextLossListener({ onUnavailable }: Pick<SceneProps, 'onUnavailable'>) {
+  const gl = useThree((state) => state.gl)
+  useEffect(() => {
+    const handleContextLost = (event: Event) => {
+      event.preventDefault()
+      onUnavailable()
+    }
+    gl.domElement.addEventListener('webglcontextlost', handleContextLost)
+    return () => gl.domElement.removeEventListener('webglcontextlost', handleContextLost)
+  }, [gl, onUnavailable])
+  return null
+}
 
 function makePlanetTexture() {
   const canvas = document.createElement('canvas')
@@ -105,7 +128,7 @@ function Astronaut() {
   </group>
 }
 
-function ChallengeComposition({ reducedMotion }: { reducedMotion: boolean }) {
+function ChallengeComposition({ active, reducedMotion }: Pick<SceneProps, 'active' | 'reducedMotion'>) {
   const planet = useRef<THREE.Group>(null)
   const astronaut = useRef<THREE.Group>(null)
   const elapsed = useRef(0)
@@ -125,8 +148,18 @@ function ChallengeComposition({ reducedMotion }: { reducedMotion: boolean }) {
     return values
   }, [viewport.height, viewport.width])
 
+  useEffect(() => {
+    elapsed.current = 0
+    if (astronaut.current) {
+      astronaut.current.position.y = -0.2
+      astronaut.current.rotation.z = 0
+    }
+    if (planet.current) planet.current.rotation.y = 0
+    invalidate()
+  }, [active, invalidate, reducedMotion])
+
   useFrame((_, delta) => {
-    if (reducedMotion || elapsed.current >= 4.5) return
+    if (!active || reducedMotion || elapsed.current >= 4.5) return
     elapsed.current = Math.min(4.5, elapsed.current + delta)
     const progress = elapsed.current / 4.5
     if (astronaut.current) {
@@ -158,7 +191,7 @@ function ChallengeComposition({ reducedMotion }: { reducedMotion: boolean }) {
   </>
 }
 
-export function ChallengeScene3D({ reducedMotion, onReady, onUnavailable }: SceneProps) {
+export function ChallengeScene3D({ active, reducedMotion, onReady, onUnavailable }: SceneProps) {
   return <Canvas
     className="challenge-scene-canvas"
     frameloop="demand"
@@ -166,14 +199,9 @@ export function ChallengeScene3D({ reducedMotion, onReady, onUnavailable }: Scen
     camera={{ position: [0, 0, 5.8], fov: 38 }}
     gl={{ alpha: true, antialias: false, powerPreference: 'low-power' }}
     fallback={null}
-    onCreated={({ gl }) => {
-      onReady()
-      gl.domElement.addEventListener('webglcontextlost', (event) => {
-        event.preventDefault()
-        onUnavailable()
-      }, { once: true })
-    }}
   >
-    <ChallengeComposition reducedMotion={reducedMotion} />
+    <SceneReady onReady={onReady} />
+    <ContextLossListener onUnavailable={onUnavailable} />
+    <ChallengeComposition active={active} reducedMotion={reducedMotion} />
   </Canvas>
 }
