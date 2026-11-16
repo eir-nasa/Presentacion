@@ -2,7 +2,30 @@ import { useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-type SceneProps = { onReady: () => void; onUnavailable: () => void }
+type SceneProps = { active: boolean; reducedMotion: boolean; onReady: () => void; onUnavailable: () => void }
+
+function SceneReady({ onReady }: Pick<SceneProps, 'onReady'>) {
+  const invalidate = useThree((state) => state.invalidate)
+  useEffect(() => {
+    invalidate()
+    const frame = window.requestAnimationFrame(onReady)
+    return () => window.cancelAnimationFrame(frame)
+  }, [invalidate, onReady])
+  return null
+}
+
+function ContextLossListener({ onUnavailable }: Pick<SceneProps, 'onUnavailable'>) {
+  const gl = useThree((state) => state.gl)
+  useEffect(() => {
+    const handleContextLost = (event: Event) => {
+      event.preventDefault()
+      onUnavailable()
+    }
+    gl.domElement.addEventListener('webglcontextlost', handleContextLost)
+    return () => gl.domElement.removeEventListener('webglcontextlost', handleContextLost)
+  }, [gl, onUnavailable])
+  return null
+}
 
 function makePlanetTexture() {
   const canvas = document.createElement('canvas')
@@ -47,7 +70,7 @@ function Atmosphere() {
   </mesh>
 }
 
-function ClosingComposition() {
+function ClosingComposition({ active, reducedMotion }: Pick<SceneProps, 'active' | 'reducedMotion'>) {
   const planet = useRef<THREE.Group>(null)
   const orbit = useRef<THREE.Group>(null)
   const { viewport } = useThree()
@@ -59,6 +82,7 @@ function ClosingComposition() {
   const centerX = viewport.width * (edgeRatio - 0.5) + orbitRadius * scale
 
   useFrame((_, delta) => {
+    if (!active || reducedMotion) return
     if (planet.current) planet.current.rotation.y += delta * 0.038
     if (orbit.current) orbit.current.rotation.z += delta * 0.18
   })
@@ -126,21 +150,17 @@ function ClosingComposition() {
   </>
 }
 
-export function ResultsClosingScene3D({ onReady, onUnavailable }: SceneProps) {
+export function ResultsClosingScene3D({ active, reducedMotion, onReady, onUnavailable }: SceneProps) {
   return <Canvas
     className="results-closing-canvas"
+    frameloop={active && !reducedMotion ? 'always' : 'demand'}
     dpr={[1, 1.2]}
     camera={{ position: [0, 0, 6], fov: 38 }}
     gl={{ alpha: true, antialias: false, powerPreference: 'low-power' }}
     fallback={null}
-    onCreated={({ gl }) => {
-      onReady()
-      gl.domElement.addEventListener('webglcontextlost', (event) => {
-        event.preventDefault()
-        onUnavailable()
-      }, { once: true })
-    }}
   >
-    <ClosingComposition />
+    <SceneReady onReady={onReady} />
+    <ContextLossListener onUnavailable={onUnavailable} />
+    <ClosingComposition active={active} reducedMotion={reducedMotion} />
   </Canvas>
 }

@@ -377,6 +377,32 @@
 .evidence-media { position: relative; isolation: isolate; display: grid; place-items: start center; padding: .75rem; border: 1px solid color-mix(in srgb, var(--color-space-blue) 26%, var(--color-line)); border-radius: var(--radius-frame); background: radial-gradient(ellipse at 50% 45%, color-mix(in srgb, var(--color-space-blue) 18%, transparent), transparent 72%), color-mix(in srgb, var(--color-void-raised) 86%, var(--color-space-blue)); }
 .evidence-media img, .evidence-media video { position: relative; z-index: 1; width: min(100%, 28rem); border-color: color-mix(in srgb, var(--color-line-strong) 70%, var(--color-space-blue)); }
 
+/* Section 05 treats portrait screens as a compact evidence sequence, not full-height columns. */
+.evidence-primary-items { gap: 3rem; }
+.evidence-figure { align-items: center; }
+.evidence-media { justify-self: center; width: fit-content; }
+.evidence-media img { width: auto; max-width: 100%; max-height: min(24rem, 58vh); }
+.evidence-figure--android-interface .evidence-media img { max-height: min(23rem, 56vh); }
+.evidence-figure--ai-interface .evidence-media img { max-height: min(20rem, 50vh); }
+.evidence-caption { min-width: 0; }
+.evidence-full-size { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; margin-top: 1rem; color: var(--color-ink); font-size: var(--text-caption); line-height: 1.4; text-decoration: none; }
+.evidence-full-size:hover { color: var(--color-ember-soft); }
+.evidence-full-size span { color: var(--color-ember); }
+.evidence-sequence { gap: 1.5rem; }
+.evidence-sequence .evidence-figure { align-items: start; }
+.evidence-sequence .evidence-media img { max-height: min(18rem, 44vh); }
+
+@media (min-width: 48rem) {
+  .evidence-primary-items .evidence-figure { display: grid; grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .evidence-primary-items .evidence-figure--ai-interface { grid-template-columns: minmax(0, 1fr) minmax(11rem, 13rem); }
+  .evidence-primary-items .evidence-figure--ai-interface .evidence-media { grid-column: 2; grid-row: 1; }
+  .evidence-primary-items .evidence-figure--ai-interface .evidence-caption { grid-column: 1; grid-row: 1; }
+  .evidence-sequence { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+  .evidence-sequence .evidence-figure { display: flex; flex-direction: column; gap: 1rem; padding-bottom: 0; border-bottom: 0; }
+  .evidence-sequence .evidence-media { align-self: center; }
+  .evidence-sequence .evidence-caption h4 { font-size: var(--text-body); }
+}
+
 
 @layer components {
   .hero-orbit-illustration { position: relative; z-index: 1; width: min(100%, 29rem); aspect-ratio: 1; opacity: .58; }
