@@ -282,7 +282,7 @@
   .evidence-technical > p { max-width: 65ch; margin: 1rem 0 0; color: var(--color-ink-muted); font-size: var(--text-body); line-height: 1.6; }
   .evidence-note { width: 100%; min-height: 10rem; display: grid; align-content: end; gap: .75rem; padding: 1.5rem; border: 1px solid var(--color-line); background: var(--color-void); }
   .evidence-note p { max-width: 28ch; margin: 0; color: var(--color-ink-muted); font-size: var(--text-body); line-height: 1.6; }
-  .research-section { border-top: 1px solid var(--color-line-strong); margin-top: 4rem; padding-top: 1.5rem; }
+  .research-section { border-top: 1px solid var(--color-line-strong); margin-top: 3rem; padding-top: 1.5rem; }
   .research-section h3 { margin: 0; font-size: var(--text-subheading); font-weight: 500; line-height: 1.3; }
   .research-section > p { max-width: 65ch; margin: 1rem 0 2rem; color: var(--color-ink-muted); font-size: var(--text-body); line-height: 1.6; }
   .research-section ul { list-style: none; display: grid; gap: 1.25rem; margin: 0; padding: 0; }
@@ -294,6 +294,7 @@
   .evidence-figure:first-child .evidence-placeholder { min-height: 15rem; }
   .evidence-figure:not(:first-child) { grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); }
   .evidence-figure:not(:first-child) .evidence-placeholder { min-height: 8rem; }
+  .research-section ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; row-gap: 1.5rem; }
 }
 
 
