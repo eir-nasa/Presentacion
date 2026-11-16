@@ -1,9 +1,12 @@
 import { Label, Placeholder, Section, SectionHeader } from '../components/primitives'
 import { challenge } from '../content/presentation'
 import { ChallengeMarks } from '../components/illustrations/ChallengeMarks'
+import { AstronautMark, SpaceBackdrop } from '../components/illustrations/SpaceBackdrop'
 
 export function Challenge() {
   return <Section id="the-challenge">
+    <SpaceBackdrop scene="challenge" />
+    <AstronautMark />
     <div className="content-section challenge-section">
       <SectionHeader id="the-challenge" label={challenge.label} title={challenge.title} />
       <div className="challenge-layout">

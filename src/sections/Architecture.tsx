@@ -1,8 +1,10 @@
 import { Figure, Label, Section, SectionHeader } from '../components/primitives'
 import { architecture } from '../content/presentation'
+import { SpaceBackdrop } from '../components/illustrations/SpaceBackdrop'
 
 export function Architecture() {
   return <Section id="how-eir-works">
+    <SpaceBackdrop scene="architecture" />
     <div className="content-section architecture-section">
       <SectionHeader id="how-eir-works" label={architecture.label} title={architecture.title} />
       <p className="section-lead architecture-lead">{architecture.lead}</p>

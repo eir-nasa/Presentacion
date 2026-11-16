@@ -1,8 +1,10 @@
 import { Label, Section, SectionHeader } from '../components/primitives'
 import { results } from '../content/results'
+import { SpaceBackdrop } from '../components/illustrations/SpaceBackdrop'
 
 export function ResultsFuture() {
   return <Section id="results-future">
+    <SpaceBackdrop scene="results" />
     <div className="content-section results-section">
       <SectionHeader id="results-future" label={results.label} title={results.title} />
       <p className="section-lead results-lead">{results.lead}</p>

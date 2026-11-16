@@ -18,6 +18,9 @@
   --color-ember: #e8832a;
   --color-ember-soft: #f0b27a;
   --color-dust: #c8a484;
+  --color-space-cyan: #20c6dd;
+  --color-space-blue: #3268c9;
+  --color-space-violet: #8b64c9;
   --font-display: Michroma, sans-serif;
   --font-body: Roboto, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -37,6 +40,7 @@
   --motion-hero-duration: 500ms;
   --motion-nav-duration: 240ms;
   --motion-offset: 8px;
+  --space-drift-duration: 24s;
 }
 
 @layer base {
@@ -51,7 +55,38 @@
   .site-header { max-width: var(--width-wide); margin-inline: auto; padding: 2rem var(--spacing-gutter); display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; }
   .wordmark { font-family: var(--font-display); font-size: 1rem; text-decoration: none; letter-spacing: .1em; }
   .site-event { font-family: var(--font-mono); font-size: var(--text-technical); letter-spacing: .1em; text-transform: uppercase; color: var(--color-ink-muted); text-align: right; }
-  .section-shell { max-width: var(--width-wide); margin-inline: auto; padding: 2.5rem var(--spacing-gutter) 3rem; }
+  .section-shell { position: relative; isolation: isolate; overflow: clip; max-width: var(--width-wide); margin-inline: auto; padding: 2.5rem var(--spacing-gutter) 3rem; }
+  .section-shell > :not(.space-backdrop):not(.astronaut-mark) { position: relative; z-index: 1; }
+  .space-backdrop, .astronaut-mark { position: absolute; z-index: 0; pointer-events: none; overflow: visible; }
+  .space-backdrop { width: min(96vw, 62rem); height: auto; right: -8%; top: 2%; color: var(--color-ink-muted); }
+  .space-backdrop::before { content: ''; position: absolute; inset: 8% 2% 8% 18%; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 68% 44%, color-mix(in srgb, var(--color-space-blue) 32%, transparent), transparent 42%), radial-gradient(ellipse at 48% 54%, color-mix(in srgb, var(--color-space-violet) 20%, transparent), transparent 48%); }
+  .space-backdrop-challenge { width: min(72vw, 46rem); left: -6%; top: 12%; }
+  .space-backdrop-solution { width: min(66vw, 42rem); right: -3%; bottom: 0; }
+  .space-backdrop-architecture { width: min(70vw, 44rem); right: -8%; top: 0; }
+  .space-backdrop-evidence { width: min(58vw, 36rem); right: -4%; top: 4%; }
+  .space-backdrop-results { width: min(86vw, 54rem); right: -4%; bottom: 0; }
+  .space-backdrop .space-planet { fill: url(#planet-light); opacity: .78; }
+  .space-backdrop .space-light { stop-color: var(--color-space-cyan); stop-opacity: .84; }
+  .space-backdrop .space-mid { stop-color: var(--color-space-blue); stop-opacity: .9; }
+  .space-backdrop .space-shadow { stop-color: var(--color-void); stop-opacity: 1; }
+  .space-backdrop .halo-core { stop-color: var(--color-space-cyan); stop-opacity: .28; }
+  .space-backdrop .halo-edge { stop-color: var(--color-space-blue); stop-opacity: 0; }
+  .space-backdrop .planet-atmosphere { opacity: .62; }
+  .space-backdrop .planet-continent { fill: var(--color-space-violet); opacity: .32; }
+  .space-backdrop .space-cyan { stop-color: var(--color-space-cyan); }
+  .space-backdrop .space-blue { stop-color: var(--color-space-blue); }
+  .space-backdrop .space-orbit { stroke: var(--color-space-cyan); stroke-width: 1.5; }
+  .space-backdrop .space-star { fill: var(--color-ink-muted); stroke: none; }
+  .space-backdrop-challenge .space-planet { opacity: .52; }
+  .space-backdrop-solution .space-planet, .space-backdrop-evidence .space-planet { opacity: .38; }
+  .astronaut-mark { width: clamp(9rem, 18vw, 15rem); height: auto; right: 7%; top: 10%; color: var(--color-ink-muted); }
+  .astronaut-mark .helmet-shell { fill: var(--color-space-blue); stroke: var(--color-space-cyan); stroke-width: 2; }
+  .astronaut-visor { fill: var(--color-void-raised); stroke: var(--color-ink-muted); stroke-width: 1.5; }
+  .astronaut-mark .suit-silhouette { stroke: var(--color-space-cyan); stroke-width: 1.5; }
+  .astronaut-mark .suit-detail { stroke: var(--color-ink-muted); }
+  .hero-spacecraft { position: absolute; z-index: 1; width: clamp(7rem, 18vw, 13rem); height: auto; left: 14%; top: 8%; pointer-events: none; color: var(--color-ink); }
+  .hero-spacecraft .craft-body { stroke: var(--color-space-cyan); stroke-width: 1.5; }
+  .hero-spacecraft .craft-wing { stroke: var(--color-ink-muted); fill: var(--color-space-blue); }
   .hero-layout { display: grid; gap: 3rem; }
   .hero-copy { position: relative; z-index: 1; }
   .section-header { border-bottom: 1px solid var(--color-line); padding-bottom: 2rem; }
@@ -61,6 +96,11 @@
   .hero-event { margin-top: 2rem; }
   .hero-figure { margin: 0; min-width: 0; }
   .orbital-composition { position: relative; display: grid; place-items: center; min-height: 20rem; }
+  .hero-planet-scene { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+  .hero-planet-scene::before { content: ''; position: absolute; z-index: 0; top: 50%; left: 50%; width: 62%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(ellipse at 34% 34%, color-mix(in srgb, var(--color-space-cyan) 50%, var(--color-space-blue)) 0%, color-mix(in srgb, var(--color-space-blue) 45%, var(--color-void)) 48%, var(--color-void) 76%); box-shadow: inset -1.1rem -0.4rem 1.8rem var(--color-void), 0 0 1.6rem color-mix(in srgb, var(--color-space-cyan) 48%, transparent); }
+  .hero-planet-scene > div, .hero-planet-scene canvas { display: block; width: 100% !important; height: 100% !important; }
+  .hero-scene-fallback { position: absolute; inset: 0; display: grid; place-items: center; }
+  .hero-scene-fallback span { width: 62%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 34% 34%, #47738c 0%, #203248 48%, #090b11 76%); box-shadow: inset -1.1rem -0.4rem 1.8rem #030407, 0 0 1.6rem #167b9a; }
   .orbit { width: min(100%, 29rem); aspect-ratio: 1; border: 1px solid var(--color-line-strong); border-radius: 50%; }
   .frame { border: 1px solid var(--color-line); border-radius: var(--radius-frame); }
   .placeholder { position: absolute; width: min(55%, 16rem); aspect-ratio: 3 / 4; display: flex; align-items: end; padding: 1.5rem; border-style: dashed; background: var(--color-void); transform: translateX(35%); }
@@ -92,6 +132,16 @@
 @media (min-width: 64rem) {
   .section-shell { min-height: 62vh; display: grid; align-items: center; }
   .hero-layout { grid-template-columns: 45% 55%; }
+}
+@media (max-width: 47.99rem) {
+  .space-backdrop { width: 120vw; right: -56%; top: 8%; }
+  .space-backdrop-challenge { width: 100vw; left: -44%; top: 20%; }
+  .space-backdrop-solution { width: 86vw; right: -38%; bottom: 0; }
+  .space-backdrop-architecture { width: 96vw; right: -48%; top: 5%; }
+  .space-backdrop-evidence { width: 76vw; right: -32%; top: 5%; }
+  .space-backdrop-results { width: 112vw; right: -58%; bottom: 0; }
+  .astronaut-mark { width: 8rem; right: 1%; top: 28%; }
+  .hero-spacecraft { width: 6rem; left: 5%; top: 2%; }
 }
 @media (min-width: 75rem) {
   .presentation-nav ol { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -211,7 +261,7 @@
 
 
 @layer components {
-  .hero-orbit-illustration { width: min(100%, 29rem); aspect-ratio: 1; }
+  .hero-orbit-illustration { position: relative; z-index: 1; width: min(100%, 29rem); aspect-ratio: 1; opacity: .58; }
   .hero-orbit-illustration path, .hero-orbit-illustration circle,
   .placeholder-illustration path, .placeholder-illustration circle { vector-effect: non-scaling-stroke; }
   .placeholder:has(.placeholder-illustration) { position: relative; }
@@ -232,8 +282,24 @@
   .section-header-revealed::after { animation: navigation-enter var(--motion-reveal-duration) ease-out both; }
   .hero-orbit-illustration { animation: illustration-enter var(--motion-hero-duration) ease-out both; }
   .presentation-nav a[aria-current="location"]::before { animation: navigation-enter var(--motion-nav-duration) ease-out both; }
+  .hero-spacecraft { animation: spacecraft-drift var(--space-drift-duration) ease-in-out infinite alternate; }
+  .astronaut-mark { animation: astronaut-float 18s ease-in-out infinite alternate; }
+  .space-backdrop .space-planet { transform-origin: 504px 176px; animation: planetary-breathe 16s ease-in-out infinite alternate; }
+  .space-backdrop .space-star:nth-of-type(2) { animation: star-glint 3.4s ease-in-out infinite alternate; }
+  .space-backdrop .space-star:nth-of-type(3) { animation: star-glint 4.6s ease-in-out 900ms infinite alternate; }
+  .space-backdrop-results .space-orbit { stroke-dasharray: 520; stroke-dashoffset: 520; animation: trajectory-trace 3s ease-out 300ms forwards; }
+  @keyframes spacecraft-drift { to { transform: translate(18px, -12px); } }
+  @keyframes astronaut-float { to { transform: translate(-10px, 14px); } }
+  @keyframes planetary-breathe { to { transform: scale(1.035); } }
+  @keyframes star-glint { to { opacity: .28; transform: scale(.65); } }
+  @keyframes trajectory-trace { to { stroke-dashoffset: 0; } }
   @keyframes illustration-enter { from { opacity: 0; transform: translateY(var(--motion-offset)); } to { opacity: 1; transform: translateY(0); } }
   @keyframes navigation-enter { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spacecraft, .astronaut-mark, .space-backdrop .space-planet, .space-backdrop .space-star, .space-backdrop-results .space-orbit { animation: none; transform: none; stroke-dashoffset: 0; }
+  html { scroll-behavior: auto; }
 }
 
 @layer components {

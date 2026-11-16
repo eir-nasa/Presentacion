@@ -1,8 +1,10 @@
 import { Figure, Label, Section, SectionHeader } from '../components/primitives'
 import { solution } from '../content/presentation'
+import { SpaceBackdrop } from '../components/illustrations/SpaceBackdrop'
 
 export function Solution() {
   return <Section id="our-solution">
+    <SpaceBackdrop scene="solution" />
     <div className="content-section solution-section">
       <SectionHeader id="our-solution" label={solution.label} title={solution.title} />
       <div className="solution-layout">
