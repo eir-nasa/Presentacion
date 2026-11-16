@@ -40,21 +40,24 @@ Reglas:
 - Se evita Inter y la pila de sistema como voz principal: son la señal más común de web genérica.
 - La serif es **[Propuesta]** y se aprueba en Fase 1. Si se aprueba, solo en frases destacadas (≤ 1 por sección). Cuenta como cuarta familia: el límite es 3 sin serif y 4 con ella.
 
-### Escala (mobile → desktop, con `clamp`)
+### Escala aprobada (móvil → desktop)
 
-| Token | Tamaño | Peso | Tracking | Interlineado | Notas |
-|---|---|---|---|---|---|
-| `display-hero` | `clamp(2.5rem, 7vw, 6rem)` | 700 | 0.08–0.15em | 1.05 | Mayúsculas. Solo hero |
-| `display-section` | `clamp(1.75rem, 4vw, 3.25rem)` | 700 | 0.08–0.12em | 1.1 | Mayúsculas. Títulos de sección |
-| `heading` | `1.25rem–1.5rem` | 500 | 0 | 1.3 | Body font |
-| `body-lg` | `1.125rem` | 400 | 0 | 1.6 | Texto de lectura principal |
-| `body` | `1rem` | 400 | 0 | 1.6 | Mínimo para párrafos |
-| `label` | `0.75rem` | 500 | 0.12em | 1.4 | Mono, mayúsculas |
-| `figure-caption` | `0.875rem` | 400 | 0 | 1.5 | `ink-muted` |
+Los extremos aproximados corresponden a anchos de 390 y 1440 px, con raíz de 16 px; `rem` conserva la adaptación a preferencias del usuario. Los valores CSS y nombres coinciden con `src/styles.css`. La escala es una decisión de diseño, no un requisito de tamaño WCAG.
 
-- Longitud de línea de párrafos: 55–75 caracteres (`max-w-prose` o equivalente).
-- Ningún texto de lectura por debajo de 14 px en móvil, ni por debajo de 16 px en desktop.
-- Títulos display: evitar romper una palabra; en móvil bajar tracking.
+| Token CSS | Tamaño | Peso / tracking / interlineado | Uso |
+|---|---|---|---|
+| `--text-hero` | `clamp(2.8125rem, calc(2.534rem + 1.143vw), 3.5625rem)` (45–57 px) | 400 / .1em / 1.05 | Michroma, título hero |
+| `--text-section` | `clamp(1.75rem, calc(1.564rem + .762vw), 2.25rem)` (28–36 px) | 400 / .08em / 1.1 | Michroma, títulos de sección |
+| `--text-subheading` | `clamp(1.375rem, calc(1.329rem + .1905vw), 1.5rem)` (22–24 px) | 500 / normal / 1.3 | Roboto, subtítulos de componentes |
+| `--text-lead` | `clamp(1.25rem, calc(1.157rem + .381vw), 1.5rem)` (20–24 px) | 400 / normal / 1.35–1.6 | Roboto, introducción y frases editoriales |
+| `--text-body` | `1rem` (16 px) | 400 / normal / 1.5–1.6 | Roboto, párrafos y texto de interfaz |
+| `--text-caption` | `.875rem` (14 px) | 400 / normal / 1.5 | Roboto, pies de figura en `ink-muted` |
+| `--text-technical` | `clamp(.75rem, calc(.704rem + .1905vw), .875rem)` (12–14 px) | 500 / .12em / 1.4 | IBM Plex Mono, etiquetas técnicas en mayúsculas |
+
+- Familia display: Michroma; cuerpo: Roboto; etiquetas técnicas: IBM Plex Mono. Sin serif aprobada.
+- Longitud orientativa de párrafos: 55–75 caracteres; frases destacadas y textos cortos pueden usar líneas más breves.
+- Mantener legibilidad y funcionalidad con texto ampliado y preferencias de espaciado; comprobar contraste AA y reflujo sin asumir que estos tamaños garantizan conformidad.
+- Títulos display: evitar romper una palabra o desbordar en móvil.
 
 ## Espaciado y layout
 
@@ -104,9 +107,17 @@ Detecta la versión en `package.json`.
   --color-dust: #C8A484;
   --color-signal: #7FB7C4; /* solo si se aprueba */
 
-  --font-display: "Michroma", "Orbitron", system-ui, sans-serif; /* ajustar tras verificar acentos */
-  --font-body: "Roboto", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Michroma", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --text-hero: clamp(2.8125rem, calc(2.534rem + 1.143vw), 3.5625rem);
+  --text-section: clamp(1.75rem, calc(1.564rem + .762vw), 2.25rem);
+  --text-subheading: clamp(1.375rem, calc(1.329rem + .1905vw), 1.5rem);
+  --text-lead: clamp(1.25rem, calc(1.157rem + .381vw), 1.5rem);
+  --text-body: 1rem;
+  --text-caption: .875rem;
+  --text-technical: clamp(.75rem, calc(.704rem + .1905vw), .875rem);
 
   --radius-sm: 4px;
   --radius-md: 8px;

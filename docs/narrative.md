@@ -1,6 +1,6 @@
 # Recorrido narrativo
 
-Guion provisional de **5 minutos 50 segundos**; no es texto definitivo ni una afirmación de resultados. La navegación libre permite entrar por cualquier sección: cada una debe conservar contexto y pies de evidencia comprensibles por sí solos.
+La presentación pública y su navegación se redactan en inglés; esta documentación interna puede permanecer en español. Guion provisional de **5 minutos 50 segundos**; no es texto definitivo ni una afirmación de resultados. La navegación libre permite entrar por cualquier sección: cada una debe conservar contexto y pies de evidencia comprensibles por sí solos.
 
 | Tiempo | Sección | Acción del expositor y transición |
 |---|---|---|

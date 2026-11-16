@@ -1,6 +1,6 @@
 # Plan de evidencias
 
-Inventario de necesidades, no afirmaciones de que las pruebas existan. Responsable provisional de todos los aportes: **equipo EIR**, hasta asignar personas concretas. Mantener cada ausencia como `[PENDIENTE: tipo de evidencia y responsable]`.
+Inventario de necesidades, no afirmaciones de que las pruebas existan. Responsable provisional de todos los aportes: **equipo EIR**, hasta asignar personas concretas. Mantener cada ausencia como `[PENDING: evidence type and owner]` en la presentación pública, que se redacta en inglés.
 
 | Sección | Evidencia o información requerida | Qué permite respaldar | Estado actual |
 |---|---|---|---|
